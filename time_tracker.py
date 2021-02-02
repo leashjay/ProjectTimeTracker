@@ -4,13 +4,12 @@
 # A.Josephs 02/02/2021
 
 import argparse
-import sys
 
 from datetime import datetime
 
-
-def parse(inputs):
+def parse():
     """parse arguments, currently only the message"""
+
     my_parser = argparse.ArgumentParser(description='Log an activity message to file')
 
     my_parser.add_argument('Message',
@@ -24,9 +23,7 @@ def parse(inputs):
 
     args = my_parser.parse_args()
 
-    input_message = args.Message
-
-    return input_message
+    return args
 
 def write_to_file(message):
     """save/append to file with timestamp"""
@@ -40,7 +37,6 @@ def get_time():
     """Obviously get the current time but also make it pretty"""
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    print(dt_string)
     return dt_string
 
 def calculate_working_time():
@@ -50,10 +46,11 @@ def calculate_working_time():
     # get current time (GLOBAL)
     # insert line with difference and string message
 
-def main(inputs):
-    message = parse(inputs)
-    write_to_file(message)
+def main():
+    args = parse()
+    input_message = args.Message
+    write_to_file(input_message)
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main()
