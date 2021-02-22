@@ -24,7 +24,7 @@ def get_last_datetime(filename):
         line_p = line.split(" ")
         return line_p[0] + " " + line_p[1]
     else:
-        print("File ghost")
+        print("New File Created mylog.txt")
         return None, None
 
 def parse():
@@ -60,9 +60,12 @@ def get_time():
 
 def calculate_working_time(self):
     """calculate time between previous entry and new entry"""
-    c_t = datetime.strptime(self.current_time, "%d/%m/%Y %H:%M:%S")
-    p_t = datetime.strptime(self.previous_datetime, "%d/%m/%Y %H:%M:%S")
-    return c_t - p_t
+    if self.previous_datetime[0] == None:
+        return 0
+    else:
+        c_t = datetime.strptime(self.current_time, "%d/%m/%Y %H:%M:%S")
+        p_t = datetime.strptime(self.previous_datetime, "%d/%m/%Y %H:%M:%S")
+        return c_t - p_t
 
 def main():
     args = parse()
